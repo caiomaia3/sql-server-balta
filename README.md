@@ -27,3 +27,5 @@ Server=localhost,1433;Database=balta;User ID=sa;Password=1q2w3e4r@#$;Trusted_Con
 ## Instalação da GUI
 
 Para acessar o servidor por meio de interface gráfica pode-se instalar o [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15).
+
+![image](img/conf-img.png)
