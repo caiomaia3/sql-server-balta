@@ -1,0 +1,25 @@
+USE [Curso]
+GO
+
+DROP TABLE IF EXISTS [Aluno] 
+GO
+
+-- TABLE CREATION
+CREATE TABLE [Aluno](
+    [Id] INT NOT NULL,
+    [Nome] NVARCHAR(80) NOT NULL,
+    [Email] NVARCHAR(160) NOT NULL,
+    [Nascimento] DATETIME NULL,
+    [Active] BIT NOT NULL DEFAULT(0)
+)
+GO
+
+
+-- CONSTRAINTS
+ALTER TABLE [Aluno]
+ADD CONSTRAINT [UQ_Aluno_email] UNIQUE([Email])
+GO
+
+ALTER TABLE [Aluno]
+ADD CONSTRAINT [PK_Aluno] PRIMARY KEY ([Id])
+GO
