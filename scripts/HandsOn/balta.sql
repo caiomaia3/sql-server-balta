@@ -1,7 +1,12 @@
+DROP DATABASE [balta]
+GO
+
 CREATE DATABASE [balta]
 GO
+
 USE [balta]
 GO
+
 
 -- TABLE CREATION
 CREATE TABLE [Student](
@@ -15,7 +20,7 @@ CREATE TABLE [Student](
 )
 GO
 
-CREATE TABLE [Autor] (
+CREATE TABLE [Author] (
     [Id] UNIQUEIDENTIFIER NOT NULL,
     [Name] NVARCHAR(80) NOT NULL,
     [Title] NVARCHAR(80) NOT NULL,
@@ -71,8 +76,8 @@ GO
 
 CREATE TABLE [CareerItem]
 (
-    [CourseId] UNIQUEIDENTIFIER NULL,
-    [CareerId] UNIQUEIDENTIFIER NULL,
+    [CourseId] UNIQUEIDENTIFIER NOT NULL,
+    [CareerId] UNIQUEIDENTIFIER NOT NULL,
     [Title] NVARCHAR(160) NOT NULL,
     [Description] TEXT NOT NULL,
     [Order] TINYINT NOT NULL
@@ -84,6 +89,7 @@ CREATE TABLE [StudentCourse]
     [CourseId] UNIQUEIDENTIFIER NOT NULL,
     [Progress] TINYINT NOT NULL,
     [Favorite] BIT NOT NULL,
+    [StartDate] DATETIME NOT NULL,
     [LastUpdateDate] DATETIME NULL
 )
 
@@ -93,8 +99,8 @@ ADD CONSTRAINT [PK_Student]
 PRIMARY KEY ([Id])
 GO
 
-ALTER TABLE [Autor]
-ADD CONSTRAINT [PK_Autor]
+ALTER TABLE [Author]
+ADD CONSTRAINT [PK_Author]
 PRIMARY KEY (Id)
 GO
 
@@ -127,13 +133,13 @@ ADD CONSTRAINT [PK_CareerItem]
 PRIMARY KEY ([CourseId],[CareerId])
 GO
 
-ALTER TABLE [CarrerItem]
-ADD CONSTRAINT [FK_Career_Course_CourseId]
-FOREIGN KEY (CareerId) REFERENCES [Course]([Id])
+ALTER TABLE [CareerItem]
+ADD CONSTRAINT [FK_CareerItem_Course_CourseId]
+FOREIGN KEY ([CourseId]) REFERENCES [Course]([Id])
 
-ALTER TABLE [CarrerItem]
-ADD CONSTRAINT [FK_Career_Course_CourseId]
-FOREIGN KEY (CareerId) REFERENCES [Course]([Id])
+ALTER TABLE [CareerItem]
+ADD CONSTRAINT [FK_CareerItem_Career_CareerId]
+FOREIGN KEY ([CareerId]) REFERENCES [Career]([Id])
 GO
 
 ALTER TABLE [StudentCourse]
@@ -141,10 +147,11 @@ ADD CONSTRAINT [PK_StudentCourse]
 PRIMARY KEY ([StudentId],[CourseId])
 GO
 
-ALTER TABLE [CarrerItem]
-ADD CONSTRAINT [FK_Career_Course_CourseId]
-FOREIGN KEY (CareerId) REFERENCES [Course]([Id])
-GO
+ALTER TABLE [StudentCourse]
+ADD CONSTRAINT [FK_StudentCourse_Student_StudentId]
+FOREIGN KEY ([StudentId]) REFERENCES [Student]([Id])
 
 ALTER TABLE [StudentCourse]
-ADD CONSTRAINT [PK_]
+ADD CONSTRAINT [FK_StudentCourse_Course_CourseId]
+FOREIGN KEY ([CourseId]) REFERENCES [Course]([Id])
+GO
